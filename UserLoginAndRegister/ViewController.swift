@@ -19,7 +19,25 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        let isUserLoggedIn = NSUserDefaults.standardUserDefaults().boolForKey("isUserLoggedIN")
+        
+        if(!isUserLoggedIn)
+        {
+        
+        self.performSegueWithIdentifier("loginView", sender: self)
+        }
+    }
 
+    @IBAction func logoutButtonTapped(sender: AnyObject) {
+        
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedIN")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        self.performSegueWithIdentifier("loginView", sender: self)
+    }
 
 }
 
